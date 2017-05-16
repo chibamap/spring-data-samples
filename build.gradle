@@ -1,0 +1,82 @@
+
+buildscript {
+  ext {
+
+    //Spring Boot
+    springBootVersion = '1.5.2.RELEASE'
+
+    //Spring
+    springVersion = '4.0.7.RELEASE'
+
+    mysqlJdbcVersion = '5.1.42'
+
+  }
+
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+  }
+}
+
+allprojects {
+}
+
+subprojects {
+
+
+  apply plugin: 'java'
+  apply plugin: 'idea'
+
+  //Java Version
+  sourceCompatibility = 1.8
+  targetCompatibility = 1.8
+
+  group = 'org.sample'
+  version = '1.0'
+
+  repositories {
+    mavenCentral()
+  }
+  //ソースディレクトリ設定
+  sourceSets {
+  }
+  dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+    compile "mysql:mysql-connector-java:${mysqlJdbcVersion}"
+
+    testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
+  }
+}
+
+project('web') {
+  apply plugin: 'org.springframework.boot'
+
+  dependencies {
+    compile project(':jpa'), project(':mybatis'), project(':doma'), project(':jooq')
+
+    compile("org.springframework.boot:spring-boot-starter-data-rest")
+  }
+}
+
+
+project('jpa') {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    compile("org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}")
+  }
+}
+
+project('mybatis') {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    compile group: 'org.mybatis', name: 'mybatis', version: '3.4.4'
+    compile("org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.0")
+  }
+}
+
