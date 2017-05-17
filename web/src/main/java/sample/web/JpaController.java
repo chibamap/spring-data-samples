@@ -25,10 +25,5 @@ public class JpaController {
     @RequestMapping("/test")
     public List<Person> test(@RequestParam(value="name", defaultValue="World") String name) {
         return personRepository.findByGroupName(name);
-        /*
-        System.out.println(name);
-
-        return personRepository.findAll();*/
-
     }
 }
