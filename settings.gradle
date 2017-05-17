@@ -1,1 +1,3 @@
+rootProject.name = 'spring-data-samples'
+
 include 'web', 'jpa', 'mybatis', 'doma', 'jooq'
