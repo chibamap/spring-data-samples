@@ -1,17 +1,12 @@
 
 buildscript {
   ext {
-
     //Spring Boot
-    springBootVersion = '1.5.2.RELEASE'
-
+    springBootVersion = '1.5.3.RELEASE'
     //Spring
     springVersion = '4.0.7.RELEASE'
-
     mysqlJdbcVersion = '5.1.42'
-
   }
-
   repositories {
     mavenCentral()
   }
@@ -25,9 +20,9 @@ allprojects {
 
 subprojects {
 
-
   apply plugin: 'java'
   apply plugin: 'idea'
+  apply plugin: "io.spring.dependency-management"
 
   //Java Version
   sourceCompatibility = 1.8
@@ -42,11 +37,15 @@ subprojects {
   //ソースディレクトリ設定
   sourceSets {
   }
+
   dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+    compile("org.springframework.boot:spring-boot-starter-web")
     compile "mysql:mysql-connector-java:${mysqlJdbcVersion}"
 
-    testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+  }
+  dependencyManagement {
+    imports { mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}") }
   }
 }
 
@@ -66,7 +65,7 @@ project('jpa') {
     mavenCentral()
   }
   dependencies {
-    compile("org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
   }
 }
 
