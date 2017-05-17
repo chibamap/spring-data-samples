@@ -1,0 +1,47 @@
+ext {
+    domaVersion = "2.16.0"
+}
+configurations {
+    domaGenRuntime
+}
+
+processResources.destinationDir = compileJava.destinationDir
+// コンパイルより前にSQLファイルを出力先ディレクトリにコピーするために依存関係を逆転する
+compileJava.dependsOn processResources
+
+
+repositories {
+    mavenCentral()
+    maven {url 'https://oss.sonatype.org/content/repositories/snapshots/'}
+}
+
+dependencies {
+    // managed by spring-boot
+    compile('org.springframework.boot:spring-boot-starter-jdbc')
+
+    // doma
+    compile "org.seasar.doma:doma:${domaVersion}"
+    compile 'org.seasar.doma.boot:doma-spring-boot-starter:1.1.0'
+
+    domaGenRuntime "org.seasar.doma:doma-gen:${domaVersion}"
+    domaGenRuntime "mysql:mysql-connector-java:${mysqlJdbcVersion}"
+}
+
+task domaGen << {
+    def rootPackageName  = 'sample.doma'
+    def dbUrl            = 'jdbc:mysql://0.0.0.0:13306/research'
+    def dbUser           = 'root'
+    def dbPassword       = 'password'
+
+    ant.taskdef(resource: 'domagentask.properties',
+            classpath: configurations.domaGenRuntime.asPath)
+    // @see http://doma-gen.readthedocs.io/ja/stable/gen/
+    ant.gen(
+            url: dbUrl, user: dbUser, password: dbPassword,
+            dialectName: 'mysql'
+    ) {
+        entityConfig(packageName: "${rootPackageName}.entity")
+        daoConfig(packageName: "${rootPackageName}.dao")
+        sqlConfig()
+    }
+}
