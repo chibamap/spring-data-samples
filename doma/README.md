@@ -1,8 +1,9 @@
 
 
-## mapperとmodelは自動生成
+## Generator
 
+dao,entity,sql は自動生成されます。
 
 ```
-gradle mbGenerator
+gradle domaGen
 ```

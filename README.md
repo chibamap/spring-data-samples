@@ -50,3 +50,11 @@ $ curl http://localhost:8080/mybatis/test?groupName=muga
 curl http://localhost:8080/doma/test?groupName=muga
 [{"id":1,"firstName":"John","lastName":"Smith","groupId":3}]
 ```
+
+
+### run doma
+
+```
+curl http://localhost:8080/doma/test?name=piyo
+```
+
