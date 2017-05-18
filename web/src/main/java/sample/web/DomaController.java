@@ -22,7 +22,7 @@ public class DomaController {
     private DomaService domaService;
 
     @RequestMapping("/test")
-    public List<Person> test(@RequestParam(value="name", defaultValue="hoge") String name) {
+    public List<Person> test(@RequestParam(value="groupName", defaultValue="hoge") String name) {
         return domaService.findByGname(name);
     }
 }
