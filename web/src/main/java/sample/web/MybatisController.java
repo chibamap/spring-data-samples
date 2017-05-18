@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 import sample.mybatis.model.Person;
 import sample.mybatis.PersonService;
 
+import java.util.List;
+
 
 /**
  * Created by chibana on 2017/05/16.
@@ -19,7 +21,8 @@ public class MybatisController {
     private PersonService personService;
 
     @RequestMapping("/test")
-    public Person test(@RequestParam(value="id", defaultValue="World") Long id) {
-        return personService.hey(id);
+    public List<Person> test(@RequestParam(value="groupName", defaultValue="hoge") String groupName) {
+        return personService.selectByGroup(groupName);
     }
 }
+

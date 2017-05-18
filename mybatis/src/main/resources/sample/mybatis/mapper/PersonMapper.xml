@@ -51,6 +51,31 @@
     -->
     id, first_name, last_name, group_id
   </sql>
+
+
+  <select id="selectByGroup" parameterType="sample.mybatis.model.Groups" resultMap="BaseResultMap">
+    <!--
+      Dynamic SQL Example
+    -->
+    select
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from person
+    <where>
+      group_id in (
+        SELECT id FROM groups g WHERE
+        <trim prefix="(" prefixOverrides="and" suffix=")">
+          <if test="id != null">
+            g.id = #{id,jdbcType=BIGINT}
+          </if>
+          <if test="name != null">
+            g.name = #{name,jdbcType=VARCHAR}
+          </if>
+        </trim>
+      )
+    </where>
+  </select>
+
   <select id="selectByExample" parameterType="sample.mybatis.model.PersonExample" resultMap="BaseResultMap">
     <!--
       WARNING - @mbggenerated
