@@ -52,9 +52,3 @@ curl http://localhost:8080/doma/test?groupName=muga
 ```
 
 
-### run doma
-
-```
-curl http://localhost:8080/doma/test?name=piyo
-```
-
