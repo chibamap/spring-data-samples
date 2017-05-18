@@ -1,12 +1,8 @@
 package sample.doma.dao;
 
-import org.seasar.doma.Dao;
-import org.seasar.doma.Delete;
-import org.seasar.doma.Insert;
-import org.seasar.doma.Select;
-import org.seasar.doma.Update;
+import org.seasar.doma.*;
 import org.seasar.doma.boot.ConfigAutowireable;
-import org.springframework.stereotype.Repository;
+import sample.doma.entity.Groups;
 import sample.doma.entity.Person;
 
 import java.util.List;
@@ -46,5 +42,5 @@ public interface PersonDao {
     int delete(Person entity);
 
     @Select
-    List<Person> findByGroupName(String groupName);
+    List<Person> findByGroup(Groups group);
 }
