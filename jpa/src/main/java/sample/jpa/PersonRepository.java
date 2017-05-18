@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.NamedNativeQuery;
 import java.util.List;
 
 /**
@@ -16,7 +15,11 @@ import java.util.List;
 public interface PersonRepository extends JpaRepository<Person, Long>,
         JpaSpecificationExecutor<Person> {
 
-
+    /**
+     * use jpql sample
+     * @param groupName
+     * @return
+     */
     @Query("select p from Person p where p.groupId in (select g.id from Group g where g.name = :name )")
     List<Person> findByGroupName(@Param("name") String groupName);
 

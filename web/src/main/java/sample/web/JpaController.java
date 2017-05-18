@@ -1,12 +1,11 @@
 package sample.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import sample.jpa.JpaService;
 import sample.jpa.Person;
-import sample.jpa.PersonRepository;
 
 import java.util.List;
 
@@ -20,10 +19,10 @@ public class JpaController {
     private static final String template = "Hello, %s!";
 
     @Autowired
-    private PersonRepository personRepository;
+    private JpaService jpaService;
 
     @RequestMapping("/test")
-    public List<Person> test(@RequestParam(value="name", defaultValue="World") String name) {
-        return personRepository.findByGroupName(name);
+    public List<Person> test(@RequestParam(value="groupName", defaultValue="hoge") String name) {
+        return jpaService.findByGname(name);
     }
 }
