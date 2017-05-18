@@ -1,28 +1,52 @@
-# Spring data samples
+Spring data samples
+---------------------
+
+# Sample Context
+
+This sample database has tables 'person' and 'groups'.
+The 'person' belongs to 'group'. It attached over group_id.
+
+The group table has name field. 
+These samples provide api to pick up person by group name. 
 
 
-## Set up
 
-- up mysql
+# Set up
+
+
+- run mysql(including sample data)
+
 ```
 docker-compose up -d
 
 ```
 
-## run app
+# Run
 
+- run app
 ```
 gradle bootRun
 ```
 
-### run jpa
+
+### jpa
 
 ```
-curl localhost:8080/jpa/test?name=muga
-```
-
-### run mybatis
+$ curl http://localhost:8080/jpa/test?groupName=muga
+[{"firstName":"John","lastName":"Smith","groupId":3}]
 
 ```
-curl localhost:8080/mybatis/test?name=1
+
+### mybatis
+
+```
+$ curl http://localhost:8080/mybatis/test?groupName=muga
+[{"id":1,"firstName":"John","lastName":"Smith","groupId":3}]
+```
+
+### doma
+
+```
+curl http://localhost:8080/doma/test?groupName=muga
+[{"id":1,"firstName":"John","lastName":"Smith","groupId":3}]
 ```
