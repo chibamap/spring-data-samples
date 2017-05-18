@@ -28,13 +28,13 @@
         <table tableName="%"
                enableInsert="true"
                enableSelectByPrimaryKey="true"
-               enableSelectByExample="false"
+               enableSelectByExample="true"
                enableUpdateByPrimaryKey="true"
                enableUpdateByExample="false"
                enableDeleteByPrimaryKey="true"
                enableDeleteByExample="false"
-               enableCountByExample="false"
-               selectByExampleQueryId="false"
+               enableCountByExample="true"
+               selectByExampleQueryId="true"
                modelType="flat">
         </table>
     </context>
